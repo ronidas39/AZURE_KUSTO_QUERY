@@ -1,0 +1,8 @@
+
+\\false$connectionDeviceIdPharmaCoDevice(connectionAuthMethod�{"scope":"device","type":"sas","issuer":"iothub","acceptingIpFilterRule":null}8connectionDeviceGenerationId$637260759149857915enqueuedTime82020-05-26T09:55:12.7150000Z�{"messageId":210,"deviceId":"Raspberry Pi Web Client","temperature":28.83140469392705,"humidity":76.72315781158416}82020-05-26T09:55:14.7160000Z temperatureAlert}
+
+PharmaCoIoT_CL 
+| extend message=extract('"temperature"[:][0-9]*[.][0-9]*',0,RawData)
+| project message
+| extend temp=extract('[0-9]*[.][0-9]*',0,message)
+| where toreal(temp)>25
